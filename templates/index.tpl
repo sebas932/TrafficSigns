@@ -1,4 +1,3 @@
-{config_load file="test.conf" section="setup"}
 {include file="header.tpl" title="Reconocimiento y Geo-Posicionamiento de señales de tránsito "}
 
 <header> Reconocimiento y Geo-Posicionamiento de señales de tránsito </header>
