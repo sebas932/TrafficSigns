@@ -1,6 +1,6 @@
-{include file="header.tpl" title="Reconocimiento y Geo-Posicionamiento de señales de tránsito "}
+{include file="header.tpl" title="Reconocimiento y Geo-Posicionamiento de señales de tránsito - Home "}
 <div id="contenedor">
-  <header> Reconocimiento y Geo-Posicionamiento de señales de tránsito </header>
+  <div id="tool-header"> Reconocimiento y Geo-Posicionamiento de señales de tránsito </div> 
   <div id="tool">
     <div id="map"></div> 
     <div id="signals"> 
@@ -35,7 +35,7 @@
           <td>{$registro.id}</td>
           <td>{$registro.lat}</td>
           <td>{$registro.lng}</td>
-          <td>{$registro.pre}/</td>
+          <td>{$registro.pre}</td>
           <td><img src="templates/imagenes/signals25/{$registro.id_signal}.png"> ({$registro.id_signal}) {$registro.nombresignal} </td>
           <td>{$registro.clasificacion}</td>
           <td>{$registro.tiempo|date_format}</td>

@@ -12,3 +12,14 @@
 
 <body onload="loadMap()">
   
+	<header>
+		<nav>
+			<ul>
+				<a href="./"><li>Home</li></a>
+				<a href="./estadisticas"><li>Estadisticas</li></a>
+				<a href="./api"><li>API</li></a>
+				<a href="./sobre"><li>Sobre</li></a>
+				<a href="./contacto"><li>Contacto</li></a>
+			</ul>
+		</nav>
+	</header>

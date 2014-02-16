@@ -13,4 +13,4 @@ $registros = $DB->Execute("SELECT r.*, s.nombre as nombresignal, c.nombre as cla
 
 $smarty->assign("signals",$signals,true);
 $smarty->assign("registros",$registros,true);
-$smarty->display('index.tpl');
+$smarty->display('contacto.tpl');
