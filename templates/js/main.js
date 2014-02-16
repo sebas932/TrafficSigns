@@ -1,6 +1,7 @@
 var regSeleccionados;
 var registros = [];
 var map;
+var geocoder;
 
 $(document).ready(function() {
 
@@ -42,6 +43,7 @@ $(document).ready(function() {
   
 });
 function loadMap() {
+  geocoder = new google.maps.Geocoder();
   var style = [
     {
       stylers: [
@@ -70,24 +72,38 @@ function loadMap() {
     styles: style
   });
 }
-function creaMarker(data) {
-  var html = "<b>" + data.nombresignal + " #"+ data.id+"</b> <br/>" + data.clasificacion;
+function creaMarker(data) { 
+  var html;
+  var address;
   var point = new google.maps.LatLng(parseFloat(data.lat), parseFloat(data.lng));
   var marker = new google.maps.Marker({
     map: map,
     position: point,
     icon:   'templates/imagenes/signals25/' + data.id_signal + '.png',
-    shadow: 'templates/signals25/sh.png'
-  });
-  var infoWindow = new google.maps.InfoWindow;
-  bindInfoWindow(marker, map, infoWindow, html);
+    shadow: 'templates/imagenes/signals25/sh.png'
+  }); 
+  geocoder.geocode({'latLng': point}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[1]) { 
+        address= results[1].formatted_address;
+      }else{
+        address= "No hay datos";
+      } 
+    } 
+    //console.log(results);
+    html = "<b>" + data.nombresignal + " #"+ data.id+"</b> <br/>"+address+" <br/>" + data.clasificacion;
+    var infoWindow = new google.maps.InfoWindow;
+    bindInfoWindow(marker, map, infoWindow, html);
+  }); 
   registros.push(marker);
 }
-function borraMarkers(registros) {
-  for (var i = 0; i < registros.length; i++) {
+function borraMarkers(registros) { 
+  for (var i = 0; i < registros.length; i++) { 
+    //registros[i].infoWindow.setMap(null);
+    registros[i].infoWindow = null; //this one is not necessary I think nut won't hurt
     registros[i].setMap(null);
   }
-  registros = []; 
+  registros.length=0; 
 }
 function bindInfoWindow(marker, map, infoWindow, html) {
   google.maps.event.addListener(marker, 'click', function() {
@@ -95,4 +111,6 @@ function bindInfoWindow(marker, map, infoWindow, html) {
     infoWindow.open(map, marker);
   });
 }
+
+
 
