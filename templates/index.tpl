@@ -35,7 +35,7 @@
         <td>{$registro.pre}/</td>
         <td><img src="templates/imagenes/signals25/{$registro.id_signal}.png"> ({$registro.id_signal}) {$registro.nombresignal} </td>
         <td>{$registro.clasificacion}</td>
-        <td>{$registro.tiempo}</td>
+        <td>{$registro.tiempo|date_format}</td>
       </tr>
       {/foreach}
     </tbody>
