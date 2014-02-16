@@ -11,4 +11,4 @@
 </head>
 
 <body onload="loadMap()">
-  <div id="contenedor">
+  
