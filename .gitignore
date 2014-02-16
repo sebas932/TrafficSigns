@@ -217,4 +217,6 @@ pip-log.txt
 
 #Project
 /config.php
-/nbproject/
+/nbproject
+/templates_c
+/cache
