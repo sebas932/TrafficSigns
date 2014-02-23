@@ -1,6 +1,7 @@
  <div id="contenedor" > 
   <footer> Creative Commons Attribution 3.0 Unported License. Copyright 2014 </footer>
  </div>
+{literal}
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -11,5 +12,6 @@
   ga('send', 'pageview');
 
 </script>
+{/literal}
 </body> 
 </html>
