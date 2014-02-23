@@ -67,10 +67,10 @@ function loadMap() {
   ];
   map = new google.maps.Map(document.getElementById("map"), {
     center: new google.maps.LatLng(3.4180687, -76.5204083),
-    zoom: 13,
+    zoom: 13, 
     mapTypeId: 'roadmap',
     styles: style
-  });
+  }); 
 }
 function creaMarker(data) { 
   var html;
