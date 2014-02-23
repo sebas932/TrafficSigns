@@ -1,4 +1,4 @@
-{include file="header.tpl" title="Reconocimiento y Geo-Posicionamiento de señales de tránsito - Home "}
+{include file="header.tpl" title="Reconocimiento y Geo-Posicionamiento de señales de tránsito - Home " s="home"}
 <div id="contenedor">
   <div id="tool-header"> Reconocimiento y Geo-Posicionamiento de señales de tránsito </div> 
   <div id="tool">

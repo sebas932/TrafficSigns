@@ -1,21 +1,10 @@
 Options +FollowSymLinks
 RewriteEngine on
 
-
-RewriteCond %{REQUEST_URI} !^/upload/
-RewriteCond %{REQUEST_URI} !^/cliente/
-RewriteCond %{REQUEST_URI} !^/up/
-RewriteCond %{REQUEST_URI} !^/admin/
-RewriteCond %{REQUEST_URI} !^/subir/
-
-
-
-
 Rewriterule ^([A-Za-z0-9-]+)/?$ $1.php [NC,L]
-#Rewriterule articulos/([A-Za-z0-9-]+)/?$ index.php?site=articulos&idblog=$1 [NC,L]
 
-
-
-
-
-
+<IfModule mod_headers.c>
+# WEEK
+<FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
+    Header set Cache-Control "max-age=604800, public"
+</FilesMatch>

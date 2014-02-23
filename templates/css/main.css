@@ -5,7 +5,6 @@ body {
   font-weight: 300;
   color: #555;  background: #EEE;  -webkit-font-smoothing: antialiased;  text-rendering: optimizelegibility;  word-wrap: break-word;
 } 
-
 a {
   color: #555;
 }
@@ -20,17 +19,27 @@ header {
 }
 nav {
   float: right;
-  font-size: 1.2em;
+  font-size: 1.1em;
 }
 
 nav ul{
+    padding: 0px 10px 0px 15px;
    
+    background: #fff;
+    border-radius: 6px;
 }
 nav ul li{
     display: inline-block;
    
-    margin: 10px 10px;
+    padding: 1px 8px 4px 8px;
+    margin: 4px 0px;
 }
+nav ul a.selected li{
+   background: #444444;
+   color:#fff;
+   border-radius: 5px;
+}
+
 footer {
   background: #444;
   color: #fff;
@@ -67,7 +76,6 @@ footer {
   height: 486px;
   /* margin: 10px 0px 10px 10px; */
 }  
-
 #ajax-loader {
   background: url(../imagenes/loader.gif) #fff no-repeat center;
   width: 100%;
@@ -92,7 +100,6 @@ footer {
   margin: 2px;
   padding: 2px;
 }
-
 #signals ul li {
   list-style: none; 
   margin: 0; 
@@ -116,7 +123,6 @@ footer {
   background: #ECECEC;
   color: #000;  font-weight: 400;
 }
-
 #signals ul li img {
   width: 40px;
   display: inline-block;
@@ -127,11 +133,9 @@ footer {
   top: 6%;
   left: 46px;
 }
-
 #registros table {
   width: 98%;
 }
-
 .box {
   padding: 10px;
   width: 100%;

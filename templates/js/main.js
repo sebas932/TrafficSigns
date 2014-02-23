@@ -9,7 +9,7 @@ $(document).ready(function() {
     regSeleccionados = [];
     $(this).toggleClass("seleccionado");
     $(".seleccionado").each(function(index, value) {
-      var id = $(value).attr("id").split("-")[1];
+      var id = value.id.split("-")[1];
       regSeleccionados.push(id);
     });
 
@@ -67,7 +67,7 @@ function loadMap() {
   ];
   map = new google.maps.Map(document.getElementById("map"), {
     center: new google.maps.LatLng(3.4180687, -76.5204083),
-    zoom: 14,
+    zoom: 13,
     mapTypeId: 'roadmap',
     styles: style
   });
