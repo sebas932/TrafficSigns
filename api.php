@@ -47,11 +47,28 @@ if(isset($_POST['context']) ) {
       echo "sent";
     }
    
-  }
+  } 
+exit();
+}
+if($_GET['gpsdata'] == "true" ) {
 
+   $sql =   "SELECT * FROM gpsdata limit 0,10;";
+
+               $cantidad = $DB->Execute($sql);  
+               /* salida de datos en formato json */
+               
+                                
+                               
+                foreach($cantidad as $cantidad) { 
+                    echo $cantidad[0]."<br>";
+                }
+                  
+                
+               
 
 exit();
 }
+
 
  
 $smarty->display('api.tpl');
