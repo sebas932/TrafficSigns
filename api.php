@@ -27,7 +27,30 @@ if(isset($_GET['id']) && intval($_GET['id'])) {
 								  print json_encode($rows);
 								
                }
+exit();
+}
 
+if(isset($_POST['context']) ) {
+
+  if($_POST['context'] == "gpsdata" ) {
+
+    $lat  = $_POST['lat'];
+    $lng  = $_POST['lng']; 
+    $tiempo = $_POST['tiempo']; 
+    $pre= $_POST['precision']; 
+    $pro= $_POST['proveedor']; 
+    $insetaData = $DB->Execute("INSERT INTO gpsdata (lat,lng,tiempo,accuracy,proveedor) values ('$lat','$lng','$tiempo','$pre','$pro')");
+     
+    if (!$insetaData) {
+      echo $DB->ErrorMsg();
+    }else{
+      echo "sent";
+    }
+   
+  }
+
+
+exit();
 }
 
  

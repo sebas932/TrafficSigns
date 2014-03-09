@@ -1,7 +1,8 @@
-var regSeleccionados;
-var registros = [];
-var map;
-var geocoder;
+var regSeleccionados,
+    registros = [],
+    map,
+    contador = 0,
+    geocoder;
 
 $(document).ready(function() {
 
@@ -75,23 +76,22 @@ function loadMap() {
 function creaMarker(data) { 
   var html;
   var address;
-  var point = new google.maps.LatLng(parseFloat(data.lat), parseFloat(data.lng));
+  var point = new google.maps.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]);
   var marker = new google.maps.Marker({
     map: map,
     position: point,
-    icon:   'templates/imagenes/signals25/' + data.id_signal + '.png',
-    shadow: 'templates/imagenes/signals25/sh.png'
+    icon:   'templates/imagenes/signals25/' + data.id_signal + '.png' 
   }); 
   geocoder.geocode({'latLng': point}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      if (results[1]) { 
-        address= results[1].formatted_address;
+      if (results[0]) { 
+        address= results[0].formatted_address;
       }else{
         address= "No hay datos";
       } 
-    } 
-    //console.log(results);
-    html = "<b>" + data.nombresignal + " #"+ data.id+"</b> <br/>"+address+" <br/>" + data.clasificacion;
+    }  
+    //console.log("results[0]"+address);
+    html = "<strong>" + data.nombresignal + " #"+ data.id+"</strong> <br/>"+address+" <br/>" + data.clasificacion;
     var infoWindow = new google.maps.InfoWindow;
     bindInfoWindow(marker, map, infoWindow, html);
   }); 
