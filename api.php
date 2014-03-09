@@ -52,7 +52,7 @@ exit();
 }
 if($_GET['gpsdata'] == "true" ) {
 
-   $sql =   "SELECT * FROM gpsdata limit 0,10;";
+   $sql =   "SELECT * FROM guybrush_tesis.gpsdata order by idgpsdata desc limit 0,10";
 
                $cantidad = $DB->Execute($sql);  
                /* salida de datos en formato json */
@@ -60,7 +60,7 @@ if($_GET['gpsdata'] == "true" ) {
                                 
                                
                 foreach($cantidad as $cantidad) { 
-                    echo $cantidad[0]."<br>";
+                    echo $cantidad[0]." -- ".$cantidad[1]." -- ".$cantidad[2]." -- ".$cantidad[3]." -- ".$cantidad[4]."<br>";
                 }
                   
                 
