@@ -4,7 +4,8 @@
 <div id="contenedor">  
 
   API
-  
+   
+ <div id="map"></div>  
 </div>
 <br>
 

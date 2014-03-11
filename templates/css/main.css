@@ -141,3 +141,11 @@ footer {
   width: 100%;
   display: inline-block;
 }
+#latlng-control {
+        background: #ffffff;
+        border: 1px solid #676767;
+        font-family: arial, helvetica, sans-serif;
+        font-size: 1em;
+        padding: 2px 4px;
+        position: absolute;
+      }
