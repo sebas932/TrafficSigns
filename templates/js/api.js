@@ -1,43 +1,46 @@
 var regSeleccionados,
         contador = 0;
-
-var flightPlanCoordinates = [
-  new google.maps.LatLng(37.772323, -122.214897),
-  new google.maps.LatLng(21.291982, -157.821856),
-  new google.maps.LatLng(-18.142599, 178.431),
-  new google.maps.LatLng(-27.46758, 153.027892)
-];
+var trayecto = [];
 
 $(document).ready(function() {
-  $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: "api.php",
-    data: {gpsdata: "true",
-      min: 0,
-      max: 100},
-    success: function(data) {
-      var tr = [];
-      $.each(data, function(index, value) { 
-         tr.push(new google.maps.LatLng(value.geometry.coordinates[1], value.geometry.coordinates[0]));
-      });
-      creaTrayecto(tr, 'ffcc00');
-    }
+
+  $("#tbutton").click(function(e) {
+    $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "api.php",
+      data: {gpsdata: "range",
+        min: $("#tmin").val(),
+        max: $("#tmax").val()},
+      success: function(data) {
+        var tr = [];
+        $.each(data, function(index, value) {
+          tr.push(new google.maps.LatLng(value.geometry.coordinates[1], value.geometry.coordinates[0]));
+        });
+        creaTrayecto(tr, '#' + (Math.random() * 0xFFFFFF << 0).toString(16));
+      }
+    });
   });
-  $.ajax({
-    type: "GET",
-    dataType: "json",
-    url: "api.php",
-    data: {gpsdata: "true",
-      min: 100,
-      max: 200},
-    success: function(data) {
-      var tr = [];
-      $.each(data, function(index, value) { 
-         tr.push(new google.maps.LatLng(value.geometry.coordinates[1], value.geometry.coordinates[0]));
-      });
-      creaTrayecto(tr, 'ff0000');
-    }
+
+  $("select#sessiones").change(function() {
+    
+    $("select option:selected").each(function() {
+      
+      $.ajax({
+      type: "GET",
+      dataType: "json",
+      url: "api.php",
+      data: {gpsdata: "session",
+        session: $(this).val()},
+      success: function(data) {
+        var tr = [];
+        $.each(data, function(index, value) {
+          tr.push(new google.maps.LatLng(value.geometry.coordinates[1], value.geometry.coordinates[0]));
+        });
+        creaTrayecto(tr, '#' + (Math.random() * 0xFFFFFF << 0).toString(16));
+      }
+    });
+    });
   });
 });
 
@@ -105,7 +108,7 @@ LatLngControl.prototype.updatePosition = function(latLng) {
 /**
  * Called on the intiial pageload.
  */
-function init() { 
+function init() {
   // Create new control to display latlng and coordinates under mouse.
   var latLngControl = new LatLngControl(map);
   // Register event listeners
@@ -118,6 +121,18 @@ function init() {
   google.maps.event.addListener(map, 'mousemove', function(mEvent) {
     latLngControl.updatePosition(mEvent.latLng);
   });
+
+  google.maps.event.addListener(map, 'click', function(mEvent) {
+    $("#text").append("<Placemark>" +
+            "<name>1</name>" +
+            "<description>casa</description>" +
+            "<Point>" +
+            "<coordinates>" + mEvent.latLng.A + ", " + mEvent.latLng.k + ",0</coordinates>" +
+            "</Point>" +
+            "</Placemark>");
+    trayecto.push(mEvent.latLng);
+    creaTrayecto(trayecto, '00ff00');
+  });
 }
 // Register an event listener to fire when the page finishes loading.
-google.maps.event.addDomListener(window, 'load', init);
+google.maps.event.addDomListener(window, 'load', init);   

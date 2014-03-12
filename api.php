@@ -7,9 +7,7 @@ if (isset($_GET['id']) && intval($_GET['id'])) {
   /* recibir variables por medio de GET */
   $id = $_GET['id'];
   $format = 'json'; //tipo de formato que devuelve es JSON
-
   /* consulta a la tabla comida dependiendo del id del usuario */
-
   $sql = "SELECT *,(SELECT COUNT(*) FROM registros r WHERE r.id_signal = s.id ) AS cantidad 
           FROM signals s
           WHERE id='$id'
@@ -48,16 +46,9 @@ if (isset($_POST['context'])) {
   }
   exit();
 }
-if ($_GET['gpsdata'] == "true") {
-  
+if ($_GET['gpsdata'] == "range") { 
   $min = $_GET['min'];
   $max = $_GET['max'];
-  print json_encode(getGpsData($min,$max));
-  exit();
-}
-
-function getGpsData($min,$max) {
-  global $DB;
   $sql = "SELECT * FROM guybrush_tesis.gpsdata order by idgpsdata desc limit $min,$max";
   $datas = $DB->Execute($sql);
   /* salida de datos en formato json */
@@ -73,9 +64,35 @@ function getGpsData($min,$max) {
         ),
     );
   }
-  return $gpsData;
+  print json_encode($gpsData);
+  exit();
+}
+if ($_GET['gpsdata'] == "session") { 
+  $session = $_GET['session'];
+  $sql = "SELECT * FROM gpsdata where sessionId = $session";
+  $datas = $DB->Execute($sql);
+  /* salida de datos en formato json */
+  $gpsData = array();
+  foreach ($datas as $data) {
+    $gpsData[] = array(
+        "id" => $data[idgpsdata],
+        "tiempo" => date('F j, Y, g:i a', ((double) $data[tiempo])),
+        "pre" => $data[accuracy],
+        "proveedor" => $data[proveedor],
+        "geometry" => array("type" => "Point",
+            "coordinates" => [(float) $data[lng], (float) $data[lat]]
+        ),
+    );
+  }
+  print json_encode($gpsData);
+  exit();
 }
 
+$sessiones = $DB->Execute("SELECT sessionId FROM gpsdata group by sessionId");
+$totalCoor = $DB->GetOne("SELECT max(idgpsdata) FROM gpsdata");
 
+
+$smarty->assign("sessiones",$sessiones,true);
+$smarty->assign("totalCoor",$totalCoor,true);
 $smarty->display('api.tpl');
 ?>

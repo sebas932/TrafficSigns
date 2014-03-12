@@ -1,6 +1,7 @@
 var registros = [],
     map,
     geocoder;
+var Path;
     
 function loadMap() {
   geocoder = new google.maps.Geocoder();
@@ -73,16 +74,19 @@ function bindInfoWindow(marker, map, infoWindow, html) {
   });
 }
 
-function creaTrayecto(data,color) { 
-  var Path = new google.maps.Polyline({
+function creaTrayecto(data,color) {  
+  Path = new google.maps.Polyline({
     path: data,
     geodesic: true,
     strokeColor: color,
-    strokeOpacity: 0.9,
+    strokeOpacity: 0.8,
     strokeWeight: 3
   });
   Path.setMap(map);
-   
+}
+
+function borraTrayecto() {  
+  Path.setMap(map);
 }
 
 
