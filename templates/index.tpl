@@ -35,10 +35,10 @@
           <td>{$registro.id}</td>
           <td>{$registro.lat}</td>
           <td>{$registro.lng}</td>
-          <td>{$registro.pre}</td>
+          <td>{$registro.accuracy}</td>
           <td><img src="templates/imagenes/signals25/{$registro.id_signal}.png"> ({$registro.id_signal}) {$registro.nombresignal} </td>
           <td>{$registro.clasificacion}</td>
-          <td>{$registro.tiempo|date_format}</td>
+          <td>{$registro.fecha_adicion|date_format}</td>
         </tr>
         {/foreach}
       </tbody>

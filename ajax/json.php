@@ -6,9 +6,10 @@ if ($context == "registros") {
   $regs = $_POST["regs"];
   $rows = array();
   if (!$regs == "") {
-    $registros = $DB->Execute("SELECT r.*, s.nombre as nombresignal, c.nombre as clasificacion
+    $registros = $DB->Execute("SELECT r.*, gps.lat, gps.lng , s.nombre as nombresignal, c.nombre as clasificacion
                                 FROM registros r
                                 INNER JOIN signals s ON r.id_signal = s.id
+				INNER JOIN gpsdata gps ON r.idgpsdata = gps.idgpsdata
                                 INNER JOIN clasificacion c ON s.clasificacion = c.idclasificacion 
                                 WHERE r.id_signal IN ($regs)
                                 ORDER BY id DESC");
