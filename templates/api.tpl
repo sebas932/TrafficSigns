@@ -7,8 +7,8 @@
   <br>
   <br>
   <strong>GPS DATA SHARED</strong>  <br>
-  <input  type="text" id="tmin" value="0"> a <input  type="text" id="tmax" value="{$totalCoor}"> : <input  type="button" id="tbutton" value="Cargar"> 
-   
+  Rangos :<input  type="text" id="tmin" value="0"> a <input  type="text" id="tmax" value="{$totalCoor}"> : <input  type="button" id="tbutton" value="Cargar"> <br>
+  SessionID :  
   <select id="sessiones"> 
     {foreach $sessiones as $session} 
     <option value="{$session.sessionId} ">{$session.sessionId} </option>
