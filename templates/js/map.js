@@ -34,7 +34,7 @@ function loadMap() {
   }); 
 }
 
-function creaMarker(data) { 
+function creaMarker(data) {  
   var html;
   var address;
   var point = new google.maps.LatLng(data.geometry.coordinates[1], data.geometry.coordinates[0]);

@@ -9,7 +9,7 @@ $(document).ready(function() {
       regSeleccionados.push(id);
     });
     $.ajax({
-      type: "POST",
+      type: "GET",
       dataType: "json",
       url: "ajax/json.php",
       data: {context: "registros",

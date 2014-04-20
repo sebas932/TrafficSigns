@@ -1,9 +1,27 @@
 var regSeleccionados,
         contador = 0;
 var trayecto = [];
+var source;
 
 $(document).ready(function() {
 
+  if (typeof (EventSource) !== "undefined") {
+    initServerSentEvents();
+  } else {
+    $("#text").append("Las funciones en tiempo real no son soportadas por su navegador. </br>Recomendamos usar la ultima version de Google Chrome");
+  }
+  // Event for server sent events (SSE) is enable/disable
+  $("input[name=realtime]:radio").change(function() {
+    if ($(this).val() == "on") {
+      initServerSentEvents();
+      console.log("on");
+    } else {
+      source.close();
+      source = null;
+      console.log("off");
+    }
+  });
+  // Event when select a range
   $("#tbutton").click(function(e) {
     $.ajax({
       type: "GET",
@@ -21,28 +39,51 @@ $(document).ready(function() {
       }
     });
   });
-
-  $("select#sessiones").change(function() {
-    
-    $("select option:selected").each(function() {
-      
+  // Event when de select box with sessions IDs change
+  $("select#sessiones").change(function() { 
+    $("select option:selected").each(function() { 
       $.ajax({
-      type: "GET",
-      dataType: "json",
-      url: "api.php",
-      data: {gpsdata: "session",
-        session: $(this).val()},
-      success: function(data) {
-        var tr = [];
-        $.each(data, function(index, value) {
-          tr.push(new google.maps.LatLng(value.geometry.coordinates[1], value.geometry.coordinates[0]));
-        });
-        creaTrayecto(tr, '#' + (Math.random() * 0xFFFFFF << 0).toString(16));
-      }
-    });
+        type: "GET",
+        dataType: "json",
+        url: "api.php",
+        data: {gpsdata: "session",
+          session: $(this).val()},
+        success: function(data) {
+          var tr = [];
+          $.each(data, function(index, value) {
+            tr.push(new google.maps.LatLng(value.geometry.coordinates[1], value.geometry.coordinates[0]));
+          });
+          creaTrayecto(tr, '#' + (Math.random() * 0xFFFFFF << 0).toString(16));
+        }
+      });
     });
   });
+  
 });
+
+function initServerSentEvents() {
+  source = new EventSource("api.php?sse=gpsdata");
+  source.onmessage = function(event) {
+    var data = jQuery.parseJSON(event.data);
+    if (data.count != lastpoint) {
+      console.log("Hay cambio " + data.count);
+      $("#text").append(data.count + "<br>").show(500);
+      creaMarker({
+        "id_signal": "location",
+        "geometry": {
+          type: "Point",
+          coordinates: [
+            data.lng,
+            data.lat
+          ]
+        }
+      });
+      lastpoint = data.count;
+    } else {
+      console.log("No cambia");
+    }
+  };
+}
 
 /**
  * LatLngControl class displays the LatLng and pixel coordinates
@@ -123,15 +164,9 @@ function init() {
   });
 
   google.maps.event.addListener(map, 'click', function(mEvent) {
-    $("#text").append("<Placemark>" +
-            "<name>1</name>" +
-            "<description>casa</description>" +
-            "<Point>" +
-            "<coordinates>" + mEvent.latLng.A + ", " + mEvent.latLng.k + ",0</coordinates>" +
-            "</Point>" +
-            "</Placemark>");
+    $("#text").hide().html("<coordinates>" + mEvent.latLng.A + ", " + mEvent.latLng.k + ",0</coordinates>").fadeIn(500);
     trayecto.push(mEvent.latLng);
-    creaTrayecto(trayecto, '00ff00');
+    creaTrayecto(trayecto, '00ff00'); 
   });
 }
 // Register an event listener to fire when the page finishes loading.

@@ -1,9 +1,9 @@
 <?php
 
 include("../config.php");
-$context = isset($_POST["context"]) ? $_POST["context"] : null;
+$context = isset($_GET["context"]) ? $_GET["context"] : null;
 if ($context == "registros") {
-  $regs = $_POST["regs"];
+  $regs = $_GET["regs"];
   $rows = array();
   if (!$regs == "") {
     $registros = $DB->Execute("SELECT r.*, gps.lat, gps.lng , s.nombre as nombresignal, c.nombre as clasificacion

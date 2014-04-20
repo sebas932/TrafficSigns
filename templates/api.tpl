@@ -1,5 +1,7 @@
 {include file="header.tpl" title="Reconocimiento y Geo-Posicionamiento de señales de tránsito - Estadisticas " s="api"}
-
+<script>
+  var lastpoint = {$lastpoint}; 
+</script>
 <br>
 <div id="contenedor">  
 
@@ -15,7 +17,7 @@
     {/foreach}
   </select>
   <div id="map"></div> 
-  
+  Notificaciones en tiempo real: ON <input type="radio" id="on" name="realtime" value="on" checked="true"/> OFF <input type="radio" id="off" name="realtime" value="off"/>
   <div id="text"></div>  
 
 </div>

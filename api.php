@@ -30,6 +30,17 @@ if (isset($_POST['context'])) {
 /* ------------------------------------------------------------------ */
 /*                              GET                                   */
 /* ------------------------------------------------------------------ */
+// Obtiene una lista de puntos dependiendo de un limite minimo y maximo
+if ($_GET['sse'] == "gpsdata") {
+  header('Content-Type: text/event-stream');
+  header('Cache-Control: no-cache');
+
+  $lastpoint = $DB->GetRow("SELECT * FROM gpsdata order by idgpsdata desc limit 0,1");
+  echo 'data: {"count": ' . $lastpoint[idgpsdata] . ', "lat": ' . $lastpoint[lat] . ', "lng": ' . $lastpoint[lng] . '}';
+  echo "\n\n";
+  flush();
+  exit();
+}
 
 // Obtiene una lista de puntos dependiendo de un limite minimo y maximo
 if ($_GET['gpsdata'] == "range") {
@@ -98,8 +109,10 @@ if (isset($_GET['id']) && intval($_GET['id'])) {
 
 $sessiones = $DB->Execute("SELECT sessionId FROM gpsdata group by sessionId");
 $totalCoor = $DB->GetOne("SELECT max(idgpsdata) FROM gpsdata");
+$lastpoint = $DB->GetOne("SELECT idgpsdata FROM gpsdata order by idgpsdata desc limit 0,1");
 
 $smarty->assign("sessiones", $sessiones, true);
 $smarty->assign("totalCoor", $totalCoor, true);
+$smarty->assign("lastpoint", $lastpoint, true);
 $smarty->display('api.tpl');
 ?>
