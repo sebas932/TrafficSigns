@@ -68,6 +68,8 @@ function initServerSentEvents() {
     if (data.count != lastpoint) {
       console.log("Hay cambio " + data.count);
       $("#text").append(data.count + "<br>").show(500);
+      borraMarkers(registros);
+      centerMap(data.lat,data.lng);
       creaMarker({
         "id_signal": "location",
         "geometry": {

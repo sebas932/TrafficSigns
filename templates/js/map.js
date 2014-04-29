@@ -34,6 +34,10 @@ function loadMap() {
   }); 
 }
 
+function centerMap(lat,lng){
+  var center = new google.maps.LatLng(lat, lng); 
+  map.panTo(center);
+}
 function creaMarker(data) {  
   var html;
   var address;
