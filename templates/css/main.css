@@ -23,21 +23,21 @@ nav {
 }
 
 nav ul{
-    padding: 0px 10px 0px 15px;
-   
-    background: #fff;
-    border-radius: 6px;
+  padding: 0px 10px 0px 15px;
+
+  background: #fff;
+  border-radius: 6px;
 }
 nav ul li{
-    display: inline-block;
-   
-    padding: 1px 8px 4px 8px;
-    margin: 4px 0px;
+  display: inline-block;
+
+  padding: 1px 8px 4px 8px;
+  margin: 4px 0px;
 }
 nav ul a.selected li{
-   background: #444444;
-   color:#fff;
-   border-radius: 5px;
+  background: #444444;
+  color:#fff;
+  border-radius: 5px;
 }
 
 footer {
@@ -93,7 +93,8 @@ footer {
   width: 284px;
   height: 486px;
   background: whitesmoke;
-  overflow-y: overlay;
+  overflow: auto;
+  /* overflow-y: overlay; */
   font-size: .8em;
   position: absolute;
   right: 0;
@@ -145,10 +146,20 @@ footer {
   display: inline-block;
 }
 #latlng-control {
-        background: #ffffff;
-        border: 1px solid #676767;
-        font-family: arial, helvetica, sans-serif;
-        font-size: 1em;
-        padding: 2px 4px;
-        position: absolute;
-      }
+  background: #ffffff;
+  border: 1px solid #676767;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 1em;
+  padding: 2px 4px;
+  position: absolute;
+}
+
+.clear{
+  clear: both;
+}
+
+/* Estadisticas */
+
+#signals-stats table {
+  width:100%;   
+}

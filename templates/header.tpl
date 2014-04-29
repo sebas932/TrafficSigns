@@ -8,8 +8,13 @@
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJ_Q0f4faF6uFawMDmQxmH83Y9Y57JgMU&sensor=false"></script>
   <script type="text/javascript" src="libs/Jquery/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="templates/js/map.js"></script>
-  {if $s eq "home"}<script type="text/javascript" async src="templates/js/main.js"></script>{/if} 
-  {if $s eq "api"}<script type="text/javascript" async src="templates/js/api.js"></script>{/if}
+  {if $s eq "home"}
+    <script type="text/javascript" async src="templates/js/main.js"></script>
+  {/if} 
+  {if $s eq "api"} 
+    <script type="text/javascript" src="libs/jquery.idle/jquery.idle.min.js"></script>
+    <script type="text/javascript" async src="templates/js/api.js"></script>
+  {/if}
   <link href="templates/css/main.css" rel="stylesheet"> 
 </head> 
 <body onload="loadMap()"> 
