@@ -1,4 +1,5 @@
 <?php
+//Index page
 require 'config.php'; 
 
 $signals = $DB->Execute("SELECT *
